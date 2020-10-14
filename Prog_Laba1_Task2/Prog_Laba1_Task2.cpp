@@ -9,7 +9,6 @@ int main()
 
     double** array2D = new double* [rows];
     double* array1D = new double[rows + columns];
-    double** ptrArr = array2D;
     int count = 0;
 
     for (size_t i = 0; i < rows; ++i) // создаём двумерный массив
@@ -27,18 +26,22 @@ int main()
         }
         cout << endl << endl;
     }
-    cout << setw(35) << "]" << endl;
+    cout << setw(35) << "]" << endl << endl;
 
     for (size_t i = 0; i < columns; i++) { // из двумерного массива создаём одномерный массив
         for (size_t j = 0; j < rows; j++) {
             //*ptrArr++ = *(*(array2D + j) + i);
-            *(array1D + count) = *(*(ptrArr + j) + i);
+            *(array1D + count) = *(*(array2D + j) + i);
             count++;
         }
     }
+
     cout << "[  ";
-    for (int i = 0; i < 15; i++) { // отображаем данные первого массива
+    for (int i = 0; i < 15; i++) { // отображаем данные одномерного массива
         cout << *(array1D + i) << "  ";
     }
     cout << "]";
+
+    delete[] array2D;
+    delete[] array1D;
 }
